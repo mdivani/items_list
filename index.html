@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <title>Items</title>
+    </head>
+    <body>
+      <div class='container'>
+        <div class='row'>
+          <h2>Add item</h2>
+          <form class='form'>
+            <div class='row'>
+              <input 
+                     id='item-name'
+                     type='text'
+                     placeholder='name'
+                     class='form__input-txt' />
+            </div>
+            <div class='row'>
+              <input 
+                     id='item-first'
+                     type='text'
+                     placeholder='string #1'
+                     class='form__input-txt' />
+            </div>
+            <div class='row'>
+              <input 
+                     id='item-second'
+                     type='text'
+                     placeholder='string #2'
+                     class='form__input-txt' />
+            </div>
+            <div class='row'>
+              <input 
+                     id='item-third'
+                     type='text'
+                     placeholder='string #3'
+                     class='form__input-txt' />
+            </div>
+            <div class='row'>
+              <input 
+                     type='submit'
+                     value='Add'
+                     class='btn' />
+            </div>
+          </form>
+        </div>
+        <div class='row'>
+          <h2>Items</h2>
+          <div 
+              class='list'
+              id='item-list'>
+            
+          </div>
+        </div>
+      </div>
+      <script src='js/index.js' ></script>
+    </body>
+</html>
