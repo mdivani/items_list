@@ -1,7 +1,9 @@
-﻿let items = JSON.parse(localStorage.getItem('items')) || [];
+﻿//set items from local storage or empty array if storage is null
+let items = JSON.parse(localStorage.getItem('items')) || [];
+//get reference to items container
 const itemList = document.getElementById('item-list');
-const createElement = document.createElement;
 
+//get data from input fields and return item object
 const createItem = () => {
   const itemName = document.getElementById('item-name').value;
   const itemFirst = document.getElementById('item-first').value || '';
@@ -18,54 +20,62 @@ const createItem = () => {
         third: itemThird
       };
 }
-
+//add item to items array, localstorage and DOM
 const addToCommonList = (item) => {
-  const domLists = Array.from(itemList.getElementsByTagName('div'));
-   const itemNames = domLists.map((list) => {
-     return list.firstChild.textContent;
-  });
-  if(itemNames.indexOf(item.name) < 0) {
-      items.push(item);
-      localStorage.setItem('items', JSON.stringify(items));
-      items.forEach((item) => {
-      if(itemNames.indexOf(item.name) < 0){
-          addItemToList(item);
-      }
-    });
+  //check if item fields are empty or item with name already exists
+  if(validateItem(item) && checkIfEmpty(item)) {
+    items.push(item);
+    localStorage.setItem('items', JSON.stringify(items));
+    addItemToList(item);
   }
 }
 
+//add item to DOM list
 const addItemToList = (item) => {
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = '<h3>' + item.name + '</h3>';
-  wrapper.setAttribute('class', 'item-wrapper');
-  wrapper.setAttribute('id', item.name);
-  const newUl = document.createElement('ul');
-  newUl.setAttribute('class', 'list hide');
+  const table = document.createElement('table');
+  table.setAttribute('class', 'item-table');
+  table.setAttribute('id', item.name);
   for (let property in item) {
-    if (item.hasOwnProperty(property) && property !== 'name') {
-      const newLi = document.createElement('li');
-      newLi.setAttribute('class', 'list__item-list');
-      newLi.appendChild(document.createTextNode(item[property]));
-      newUl.appendChild(newLi);
+    if (item.hasOwnProperty(property)) {
+      const newRow = document.createElement('tr');
+      newRow.setAttribute('class', 'item-table__row');
+      const newData = document.createElement('td');
+      newData.setAttribute('class', 'item-table__data');
+      const newDataHeader = document.createElement('td');
+      newDataHeader.setAttribute('class', 'item-table__data item-table__data--header');
+      newDataHeader.appendChild(document.createTextNode(property));
+      newData.appendChild(document.createTextNode(item[property]));
+      newRow.appendChild(newDataHeader);
+      newRow.appendChild(newData);
+      table.appendChild(newRow);
     }
   }
-  wrapper.appendChild(newUl);
-  wrapper.addEventListener('click', () => { onWrapperClick(wrapper) });
-  itemList.appendChild(wrapper);
+  itemList.appendChild(table);
 }
 
+//gets called on items form submit
 const onItemSubmit = (e) => {
   e.preventDefault();
   const item = createItem()
   addToCommonList(item);
 } 
 
-const onWrapperClick = (wrapper) => {
-  const ul = wrapper.childNodes[1];
-  ul.classList.toggle('hide');
+//return false if item already exists
+const validateItem = (item) => {
+   for(let i = 0; i < items.length; i++) {
+     if(items[i].name === item.name) {
+       return false;
+     }
+   }
+   return true;
 }
 
+//return false if any submit item field is empty
+const checkIfEmpty = (item) => {
+   return !item.name || !item.second || !item.third || !item.first;
+}
+
+//set items from local storage
 const load = () => {
     if(items.length > 0) {
       items.forEach((item) => {
@@ -74,6 +84,7 @@ const load = () => {
   }
 }
 
+//attach event to form submit
 const form = document.getElementsByTagName('form')[0];
 form.addEventListener('submit', onItemSubmit);
 
