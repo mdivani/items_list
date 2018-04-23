@@ -9,10 +9,6 @@ const createItem = () => {
   const itemFirst = document.getElementById('item-first').value || '';
   const itemSecond = document.getElementById('item-second').value || '';
   const itemThird = document.getElementById('item-third').value || '';
-  document.getElementById('item-name').value = '';
-  document.getElementById('item-first').value = '';
-  document.getElementById('item-second').value = '';
-  document.getElementById('item-third').value = '';
   return  {
         name: itemName,
         first: itemFirst,
@@ -27,6 +23,10 @@ const addToCommonList = (item) => {
     items.push(item);
     localStorage.setItem('items', JSON.stringify(items));
     addItemToList(item);
+    document.getElementById('item-name').value = '';
+    document.getElementById('item-first').value = '';
+    document.getElementById('item-second').value = '';
+    document.getElementById('item-third').value = '';
   }
 }
 
@@ -72,7 +72,10 @@ const validateItem = (item) => {
 
 //return false if any submit item field is empty
 const checkIfEmpty = (item) => {
-   return !item.name || !item.second || !item.third || !item.first;
+   if(!item.name || !item.second || !item.third || !item.first) {
+     return false;
+   }
+   return true;
 }
 
 //set items from local storage
