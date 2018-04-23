@@ -1,4 +1,4 @@
-﻿let items = [];
+﻿let items = JSON.parse(localStorage.getItem('items')) || [];
 const itemList = document.getElementById('item-list');
 const createElement = document.createElement;
 
@@ -26,6 +26,7 @@ const addToCommonList = (item) => {
   });
   if(itemNames.indexOf(item.name) < 0) {
       items.push(item);
+      localStorage.setItem('items', JSON.stringify(items));
       items.forEach((item) => {
       if(itemNames.indexOf(item.name) < 0){
           addItemToList(item);
@@ -63,8 +64,17 @@ const onItemSubmit = (e) => {
 const onWrapperClick = (wrapper) => {
   const ul = wrapper.childNodes[1];
   ul.classList.toggle('hide');
-  console.log(ul);
+}
+
+const load = () => {
+    if(items.length > 0) {
+      items.forEach((item) => {
+        addItemToList(item);
+    });
+  }
 }
 
 const form = document.getElementsByTagName('form')[0];
 form.addEventListener('submit', onItemSubmit);
+
+load();
