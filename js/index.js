@@ -32,25 +32,17 @@ const addToCommonList = (item) => {
 
 //add item to DOM list
 const addItemToList = (item) => {
-  const table = document.createElement('table');
-  table.setAttribute('class', 'item-table');
-  table.setAttribute('id', item.name);
+  const newRow = document.createElement('tr');
+  newRow.setAttribute('class', 'item-table__row');
   for (let property in item) {
     if (item.hasOwnProperty(property)) {
-      const newRow = document.createElement('tr');
-      newRow.setAttribute('class', 'item-table__row');
       const newData = document.createElement('td');
       newData.setAttribute('class', 'item-table__data');
-      const newDataHeader = document.createElement('td');
-      newDataHeader.setAttribute('class', 'item-table__data item-table__data--header');
-      newDataHeader.appendChild(document.createTextNode(property));
       newData.appendChild(document.createTextNode(item[property]));
-      newRow.appendChild(newDataHeader);
       newRow.appendChild(newData);
-      table.appendChild(newRow);
     }
   }
-  itemList.appendChild(table);
+  itemList.appendChild(newRow);
 }
 
 //gets called on items form submit
