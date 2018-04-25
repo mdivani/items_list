@@ -5,64 +5,117 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+        <link rel="stylesheet" href="css/datepicker.css">
         <link rel="stylesheet" href="css/style.css">
-        <title>Items</title>
+        <title>Items list</title>
     </head>
     <body>
       <div class='container'>
-        <div class='row'>
-          <h2>Add item</h2>
-          <form class='form'>
-            <div class='row'>
-              <input 
-                     id='item-name'
-                     type='text'
-                     placeholder='name'
-                     class='form__input-txt' />
-            </div>
-            <div class='row'>
-              <input 
-                     id='item-first'
-                     type='text'
-                     placeholder='string #1'
-                     class='form__input-txt' />
-            </div>
-            <div class='row'>
-              <input 
-                     id='item-second'
-                     type='text'
-                     placeholder='string #2'
-                     class='form__input-txt' />
-            </div>
-            <div class='row'>
-              <input 
-                     id='item-third'
-                     type='text'
-                     placeholder='string #3'
-                     class='form__input-txt' />
-            </div>
-            <div class='row'>
-              <input 
-                     type='submit'
-                     value='Add'
-                     class='btn' />
-            </div>
-          </form>
-        </div>
-        <div class='row'>
-          <h2>Items</h2>
-          <table
-              class='item-table'
-              id='item-list'>
-              <tr>
-                <th>Name</th>
-                <th>String 1</th>
-                <th>String 2</th>
-                <th>String 3</th>
-              </tr>
+        <div class="col-1-of-3">
+            <h2>Create list</h2>
+            <form class='form'>
+              <div class='row'>
+                <input 
+                       id='list-name'
+                       placeholder='List name'
+                       class='form__input-txt' />
+              </div>
+              <div class='row'>
+                <input 
+                       id='list-start'
+                       placeholder='Start Date'
+                       class='form__input-txt datepicker' />
+              </div>
+              <div class='row'>
+                <input 
+                       id='list-end'
+                       placeholder='End Date'
+                       class='form__input-txt datepicker' />
+              </div>
+              <div class='row'>
+                <select 
+                       id='item-select'
+                       placeholder='select items'
+                       class='form__input-txt' >
+                      <option value="" disabled selected hidden>Select Item...</option>
+                </select>
+                <button id='btn-add' class='btn btn--small'>add</button>
+              </div>
+              <div class='row'>
+                <h5 class='label'>Items:</h5>
+                <ul id='selected-items' class='list'>
+                </ul>
+              </div>
+              <div class='row'>
+                       <input 
+                              type='submit'
+                              class='btn'
+                              value='Create List'
+                              />
+              </div>
+            </form>
+        <hr />
+          <h3>Lists</h3>
+          <div id='lists' class='row'>
+        
           </div>
         </div>
+        <div class="col-2-of-3">
+            <div class='row'>
+              <h2>Add item</h2>
+              <form class='form'>
+                <div class='row'>
+                  <input 
+                        id='item-name'
+                        type='text'
+                        placeholder='name'
+                        class='form__input-txt' />
+                </div>
+                <div class='row'>
+                  <input 
+                        id='item-first'
+                        type='text'
+                        placeholder='string #1'
+                        class='form__input-txt' />
+                </div>
+                <div class='row'>
+                  <input 
+                        id='item-second'
+                        type='text'
+                        placeholder='string #2'
+                        class='form__input-txt' />
+                </div>
+                <div class='row'>
+                  <input 
+                        id='item-third'
+                        type='text'
+                        placeholder='string #3'
+                        class='form__input-txt' />
+                </div>
+                <div class='row'>
+                  <input 
+                        type='submit'
+                        value='Add'
+                        class='btn' />
+                </div>
+              </form>
+            </div>
+            <div class='row'>
+              <h3>Items</h3>
+              <table
+                  class='item-table'
+                  id='item-list'>
+                  <tr>
+                    <th>Name</th>
+                    <th>String 1</th>
+                    <th>String 2</th>
+                    <th>String 3</th>
+                  </tr>
+              </div>
+        </div>
+        </div>
       </div>
+      <script src='js/datepicker.js' ></script>
       <script src='js/index.js' ></script>
     </body>
 </html>
